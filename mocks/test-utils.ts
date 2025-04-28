@@ -1,4 +1,6 @@
-import type { Company, Industry } from '@/lib/api';
+// mocks/test-utils.ts
+
+import { CompanyProfile } from '@/types/company';
 
 export const mockContactInfo = {
   phone: '+79991234567',
@@ -9,42 +11,13 @@ export const mockContactInfo = {
   additionalEmails: 'info@company.com, support@company.com'
 };
 
-export const mockIndustry: Industry = {
+export const mockIndustry = {
   id: 1,
-  attributes: {
-    name: 'IT и разработка ПО',
-    slug: 'it-software',
-    description: 'Компании, занимающиеся разработкой программного обеспечения',
-    level: 1,
-    isMainCategory: true,
-    parent: {
-      data: null
-    },
-    children: {
-      data: [
-        {
-          id: 2,
-          attributes: {
-            name: 'Веб-разработка',
-            level: 2
-          }
-        }
-      ]
-    },
-    companies: {
-      data: [
-        {
-          id: 1,
-          attributes: {
-            name: 'Технологическая компания'
-          }
-        }
-      ]
-    },
-    createdAt: '2023-01-01T00:00:00.000Z',
-    updatedAt: '2023-01-01T00:00:00.000Z',
-    publishedAt: '2023-01-01T00:00:00.000Z'
-  }
+  name: 'IT и разработка ПО',
+  slug: 'it-software',
+  description: 'Компании, занимающиеся разработкой программного обеспечения',
+  level: 1,
+  isMainCategory: true,
 };
 
 export const mockGeoLocation = {
@@ -96,49 +69,45 @@ export const mockSearchBaseProfile = {
   socialMedia: mockSocialMedia
 };
 
-export const mockCompany: Company = {
+export const mockCompany: CompanyProfile = {
   id: 1,
-  attributes: {
-    name: 'Тестовая компания',
-    slug: 'test-company',
-    description: 'Описание тестовой компании',
-    legalStatus: 'company',
-    priceTier: 'premium',
-    branchesCount: 5,
-    taxId: '1234567890',
-    website: 'https://company.com',
-    email: 'info@company.com',
-    phone: '+79991234567',
-    address: 'ул. Примерная, 123, Москва',
-    foundedYear: 2000,
-    employeesCount: 100,
-    lastUpdated: '2023-01-01T00:00:00.000Z',
-    location: mockGeoLocation,
-    contacts: mockContactInfo,
-    social: mockSocialMedia,
-    yandexDirectories: mockYandexDirectories,
-    searchBase: mockSearchBaseProfile,
-    contactPerson: [mockPerson],
-    industry: {
-      data: {
-        id: mockIndustry.id,
-        attributes: {
-          ...mockIndustry.attributes
-          //displayName: mockIndustry.attributes.name
-        }
-      }
-    },
-    dataSources: [
-      { source: 'yandex', id: '123' },
-      { source: '2gis', id: '456' }
-    ]
+  documentId: "bugwn7imeslkpqzp22yz19kw",
+  name: 'Тестовая компания',
+  slug: 'test-company',
+  description: 'Описание тестовой компании',
+  legalStatus: 'company',
+  priceTier: 'premium',
+  branchesCount: 5,
+  taxId: '1234567890',
+  website: 'https://company.com',
+  email: 'info@company.com',
+  phone: '+79991234567',
+  address: 'ул. Примерная, 123, Москва',
+  foundedYear: 2000,
+  employeesCount: 100,
+  lastUpdated: '2023-01-01T00:00:00.000Z',
+  createdAt: '2023-01-01T00:00:00.000Z',
+  updatedAt: '2023-01-01T00:00:00.000Z',
+  publishedAt: '2023-01-01T00:00:00.000Z',
+  locale: 'ru',
+  industry: {
+    id: mockIndustry.id,
+    name: mockIndustry.name,
+    slug: mockIndustry.slug
+  },
+  location: mockGeoLocation,
+  contacts: mockContactInfo,
+  social: mockSocialMedia,
+  yandexDirectories: mockYandexDirectories,
+  searchBase: mockSearchBaseProfile,
+  contactPerson: [mockPerson],
+  dataSources: {
+    yandexDirectories: {
+      status: "success",
+      updatedAt: "2023-01-01T00:00:00.000Z"
+    }
   }
 };
-
-// mockIndustry.attributes.companies.data = [{
-//   id: mockCompany.id,
-//   attributes: mockCompany.attributes
-// }];
 
 export const createMockResponse = <T>(data: T, meta?: any) => ({
   data,

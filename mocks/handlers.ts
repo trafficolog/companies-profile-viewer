@@ -33,12 +33,42 @@ export const handlers = [
     return HttpResponse.json({
       data: {
         ...mockCompany,
-        id: params.id
+        id: Number(params.id)
       }
     });
   }),
 
   http.get('*/company-profiles/count', () => {
     return HttpResponse.json({ count: 1 });
+  }),
+  
+  http.get('*/company-profiles/slug/:slug', ({ params }) => {
+    return HttpResponse.json({
+      data: {
+        ...mockCompany,
+        slug: params.slug
+      }
+    });
+  }),
+
+  http.get('*/company-profiles/tax-id/:taxId', ({ params }) => {
+    return HttpResponse.json({
+      data: {
+        ...mockCompany,
+        taxId: params.taxId
+      }
+    });
+  }),
+  
+  http.get('*/company-profiles/industry/:id', ({ params }) => {
+    return HttpResponse.json({
+      data: [{
+        ...mockCompany,
+        industry: {
+          ...mockCompany.industry,
+          id: Number(params.id)
+        }
+      }]
+    });
   }),
 ];

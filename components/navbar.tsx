@@ -24,7 +24,7 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand>
           <NextLink href="/" className="flex items-center gap-2">
-            <span className="font-bold text-lg">{siteConfig.name}</span>
+            <span className="font-bold text-3xl">{siteConfig.name}</span>
           </NextLink>
         </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-6">

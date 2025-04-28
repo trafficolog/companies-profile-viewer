@@ -1,10 +1,7 @@
 import { companyProfileApi } from '@/lib/api';
 import { server } from '@/mocks/server';
 import { http, HttpResponse } from 'msw';
-import { 
-  mockCompany,
-  mockIndustry
-} from '@/mocks/test-utils';
+import { mockCompany, mockIndustry } from '@/mocks/test-utils';
 
 describe('CompanyProfile API', () => {
   describe('CRUD Operations', () => {
@@ -80,7 +77,7 @@ describe('CompanyProfile API', () => {
 
       const result = await companyProfileApi.findOne('1');
       expect(result.id).toBe(1); // Проверяем как число, не строку
-      expect(result.attributes.name).toBe(mockCompany.attributes.name);
+      expect(result.name).toBe(mockCompany.name);
     });
 
     it('should fetch company with populated relations', async () => {
@@ -94,23 +91,19 @@ describe('CompanyProfile API', () => {
           return HttpResponse.json({
             data: {
               ...mockCompany,
-              attributes: {
-                ...mockCompany.attributes,
-                industry: hasPopulate ? {
-                  data: {
-                    id: 1,
-                    attributes: mockIndustry.attributes
-                  }
-                } : undefined
-              }
+              industry: hasPopulate ? {
+                id: 1,
+                name: mockIndustry.name, 
+                slug: mockIndustry.slug
+              } : undefined
             }
           });
         })
       );
 
       const result = await companyProfileApi.findOne('1', ['industry']);
-      expect(result.attributes.industry?.data?.id ?? undefined).toBe(1);
-      expect(result.attributes.industry?.data?.attributes ?? undefined).toBeDefined();
+      expect(result.industry?.id ?? undefined).toBe(1);
+      expect(result.industry?.name ?? undefined).toBeDefined();
     });
 
     it('should count companies', async () => {

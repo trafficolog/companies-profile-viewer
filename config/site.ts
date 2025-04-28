@@ -2,7 +2,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Агрегатор профилей компаний",
+  name: "OVEN",
   description: "Просмотр профилей компаний собранных с разных публичных источников",
   navItems: [
     {

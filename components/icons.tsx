@@ -100,7 +100,7 @@ export const MoonFilledIcon = ({size = 24, width, height, ...props}: IconSvgProp
   </svg>
 );
 
-export const FilterIcon = ({size = 24, width, height, ...props}: IconSvgProps) => (
+export const FilterIcon = ({size = 16, width, height, ...props}: IconSvgProps) => (
   <svg
     focusable="false"
     height={size || height}
@@ -109,16 +109,37 @@ export const FilterIcon = ({size = 24, width, height, ...props}: IconSvgProps) =
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <path
-      clipRule="evenodd"
-      d="M10.0003 2.29166C7.58408 2.29166 5.62533 4.25041 5.62533 6.66666C5.62533 9.0829 7.58408 11.0417 10.0003 11.0417C12.4166 11.0417 14.3753 9.0829 14.3753 6.66666C14.3753 4.25041 12.4166 2.29166 10.0003 2.29166ZM4.37533 6.66666C4.37533 3.56005 6.89372 1.04166 10.0003 1.04166C13.1069 1.04166 15.6253 3.56005 15.6253 6.66666C15.6253 7.16742 15.5599 7.65289 15.4371 8.11501C17.5014 8.94794 18.9587 10.9698 18.9587 13.3333C18.9587 16.4399 16.4403 18.9583 13.3337 18.9583C12.0865 18.9583 10.9331 18.5518 10.0004 17.8647C9.06748 18.5521 7.91468 18.9583 6.66699 18.9583C3.56039 18.9583 1.04199 16.4399 1.04199 13.3333C1.04199 10.9698 2.49922 8.94794 4.56355 8.11501C4.44076 7.65289 4.37533 7.16742 4.37533 6.66666ZM5.01777 9.27963C3.41873 9.93082 2.29199 11.5011 2.29199 13.3333C2.29199 15.7496 4.25075 17.7083 6.66699 17.7083C9.08324 17.7083 11.042 15.7496 11.042 13.3333C11.042 12.9481 10.9923 12.5751 10.8993 12.2202C10.6066 12.2672 10.3063 12.2917 10.0003 12.2917C7.83695 12.2917 5.95882 11.0704 5.01777 9.27963ZM12.1037 11.8852C12.2266 12.3477 12.292 12.8333 12.292 13.3333C12.292 14.7315 11.7818 16.0106 10.9375 16.9945C11.6258 17.4461 12.4487 17.7083 13.3337 17.7083C15.7499 17.7083 17.7087 15.7496 17.7087 13.3333C17.7087 11.5011 16.5819 9.93082 14.9829 9.27963C14.3653 10.4548 13.3442 11.3848 12.1037 11.8852Z"
-      fill="#A1A1AA"
-      fillRule="evenodd"
-    />
+    <g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 14a3 3 0 1 1 0 6a3 3 0 0 1 0-6Zm5-10a3 3 0 1 0 0 6a3 3 0 0 0 0-6Z"></path><path stroke-linecap="round" d="M15 16.959h7m-13-10H2m0 10h2m18-10h-2"></path></g>
   </svg>
 );
 
-export const HeartIcon = ({size = 24, width, height, ...props}: IconSvgProps) => (
+export const SortIcon = ({size = 16, width, height, ...props}: IconSvgProps) => (
+  <svg
+    focusable="false"
+    height={size || height}
+    viewBox="0 0 20 20"
+    width={size || width}
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M22 7H2m17 5H5m11 5H8"></path>
+  </svg>
+);
+
+export const ChangeIcon = ({size = 16, width, height, ...props}: IconSvgProps) => (
+  <svg
+    focusable="false"
+    height={size || height}
+    viewBox="0 0 20 20"
+    width={size || width}
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 8H6m0 0l4.125-4M6 8l4.125 4M6 16h12m0 0l-4.125-4M18 16l-4.125 4"></path>
+  </svg>
+);
+
+export const HeartIcon = ({size = 16, width, height, ...props}: IconSvgProps) => (
   <svg 
     xmlns="http://www.w3.org/2000/svg"
     focusable="false"
@@ -330,7 +351,7 @@ export const CheckCircleIcon = ({size = 24, width, height, ...props}: IconSvgPro
 );
 
 export const SearchIcon = ({
-  size = 24,
+  size = 16,
   strokeWidth = 1.5,
   width,
   height,
@@ -353,12 +374,6 @@ export const SearchIcon = ({
       strokeLinejoin="round"
       strokeWidth={strokeWidth}
     />
-    <path
-      d="M22 22L20 20"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={strokeWidth}
-    />
+      <path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M22 22L20 20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
   </svg>
 );

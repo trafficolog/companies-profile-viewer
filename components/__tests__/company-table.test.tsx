@@ -3,11 +3,16 @@ import CompanyTable from '../company-table';
 import { server } from '@/mocks/server';
 import { HttpResponse, http } from 'msw';
 import { mockCompany } from '@/mocks/test-utils';
+import { NormalizedCompany } from '@/types/company';
+import { normalizeCompany } from '@/lib/normalizers';
 
 describe('CompanyTable', () => {
   beforeAll(() => server.listen());
   afterEach(() => server.resetHandlers());
   afterAll(() => server.close());
+
+  // Create a normalized mock company for testing
+  const normalizedMockCompany: NormalizedCompany = normalizeCompany(mockCompany);
 
   it('should render company data', async () => {
     server.use(
@@ -19,10 +24,19 @@ describe('CompanyTable', () => {
       })
     );
 
-    render(<CompanyTable data={[mockCompany]} />);
+    render(
+      <CompanyTable 
+        data={[normalizedMockCompany]} 
+        sorting={[{ id: 'name', desc: false }]} 
+        onSortingChange={() => {}}
+      />
+    );
     
-    expect(await screen.findByText('Технологическая компания')).toBeInTheDocument();
-    expect(screen.getByText('IT и разработка ПО')).toBeInTheDocument();
+    // Updated test to check for actual data from the mock
+    expect(await screen.findByText(normalizedMockCompany.name)).toBeInTheDocument();
+    if (normalizedMockCompany.industry) {
+      expect(screen.getByText(normalizedMockCompany.industry.displayName)).toBeInTheDocument();
+    }
   });
 
   it('should show empty state', async () => {
@@ -35,7 +49,13 @@ describe('CompanyTable', () => {
       })
     );
 
-    render(<CompanyTable data={[]} />);
+    render(
+      <CompanyTable 
+        data={[]} 
+        sorting={[{ id: 'name', desc: false }]} 
+        onSortingChange={() => {}}
+      />
+    );
     expect(await screen.findByText('Нет данных для отображения')).toBeInTheDocument();
   });
 });

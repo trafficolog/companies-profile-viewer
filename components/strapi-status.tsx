@@ -32,19 +32,19 @@ export function StrapiStatus() {
     switch(status) {
       case 'ok':
         return {
-          label: 'Агрегатор профилей: онлайн',
+          label: 'Хранилище: онлайн',
           color: 'success',
           icon: <CheckCircleIcon />
         };
       case 'error':
         return {
-          label: 'Агрегатор профилей: нет соединения',
+          label: 'Хранилище: нет соединения',
           color: 'danger',
           icon: <ExclamationCircleIcon />
         };
       default:
         return {
-          label: 'Агрегатор профилей: проверка...',
+          label: 'Хранилище: проверка...',
           color: 'default',
           icon: <CubesLinearIcon />
         };
@@ -61,7 +61,7 @@ export function StrapiStatus() {
         color={config.color as any}
         size="sm"
       >
-        {config.label}
+        b{config.label}
       </Chip>
     </Tooltip>
   );
