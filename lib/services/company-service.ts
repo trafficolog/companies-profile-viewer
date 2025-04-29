@@ -1,181 +1,98 @@
-// lib/services/company-service.ts
-import { companyProfileApi } from '@/lib/api';
-import { normalizeCompanies, normalizeCompany } from '@/lib/normalizers';
-import { NormalizedCompany } from '@/types/company';
+// src/lib/services/company-service.ts
+
+import { LegalStatus, PriceTier } from '@/types/company';
 
 /**
- * Service class for working with company data
- * Provides a clean interface for components to interact with the API
+ * Класс для работы с данными компаний
  */
 export class CompanyService {
   /**
-   * Get a list of companies with filtering, sorting, and pagination
+   * Форматирует организационно-правовую форму для отображения
    */
-  static async getCompanies({
-    page = 1,
-    pageSize = 10,
-    sort = 'name:asc',
-    search = '',
-    filters = {},
-    industryId = null,
-  }: {
-    page?: number;
-    pageSize?: number;
-    sort?: string;
-    search?: string;
-    filters?: Record<string, any>;
-    industryId?: number | null;
-  }): Promise<{
-    companies: NormalizedCompany[];
-    pagination: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
-  }> {
-    try {
-      // Build filters object
-      const queryFilters: Record<string, any> = { ...filters };
-      
-      // Add search filter if provided
-      if (search && search.trim()) {
-        queryFilters.name = { $containsi: search.trim() };
-      }
-      
-      // If industry ID is provided, filter by industry
-      if (industryId) {
-        queryFilters.industry = { id: industryId };
-      }
-      
-      // Fetch data from API
-      const result = await companyProfileApi.find({
-        page,
-        pageSize,
-        sort,
-        filters: queryFilters,
-        populate: ['industry', 'location'],
-      });
-      
-      // Normalize the company data
-      const normalizedCompanies = normalizeCompanies(result.data);
-      
-      return {
-        companies: normalizedCompanies,
-        pagination: result.meta.pagination,
-      };
-    } catch (error) {
-      console.error('Error fetching companies:', error);
-      return {
-        companies: [],
-        pagination: { page, pageSize, pageCount: 0, total: 0 },
-      };
-    }
-  }
-
-  /**
-   * Get a single company by ID
-   */
-  static async getCompanyById(id: number | string): Promise<NormalizedCompany | null> {
-    try {
-      const result = await companyProfileApi.findOne(id, ['industry', 'location', 'contacts', 'social']);
-      return normalizeCompany(result);
-    } catch (error) {
-      console.error(`Error fetching company with ID ${id}:`, error);
-      return null;
-    }
-  }
-
-  /**
-   * Get a company by slug
-   */
-  static async getCompanyBySlug(slug: string): Promise<NormalizedCompany | null> {
-    try {
-      const result = await companyProfileApi.findBySlug(slug);
-      return normalizeCompany(result);
-    } catch (error) {
-      console.error(`Error fetching company with slug ${slug}:`, error);
-      return null;
-    }
-  }
-
-  /**
-   * Get companies by industry
-   */
-  static async getCompaniesByIndustry(industryId: number | string): Promise<NormalizedCompany[]> {
-    try {
-      const results = await companyProfileApi.findByIndustry(industryId);
-      return normalizeCompanies(results);
-    } catch (error) {
-      console.error(`Error fetching companies for industry ${industryId}:`, error);
-      return [];
-    }
-  }
-
-  /**
-   * Get total count of companies (optionally filtered)
-   */
-  static async getCompaniesCount(filters: Record<string, any> = {}): Promise<number> {
-    try {
-      const result = await companyProfileApi.count(filters);
-      return result.count || 0;
-    } catch (error) {
-      console.error('Error getting companies count:', error);
-      return 0;
-    }
-  }
-
-  /**
-   * Format a company's legal status for display
-   */
-  static formatLegalStatus(status: string): string {
-    const statusMap: Record<string, string> = {
+  static formatLegalStatus(status: LegalStatus): string {
+    const statusMap: Record<LegalStatus, string> = {
       company: 'Компания',
       individual_entrepreneur: 'ИП',
       self_employed: 'Самозанятый',
       individual: 'Физлицо',
-      unknown: 'Не указано',
+      unknown: 'Не указано'
     };
-    return statusMap[status] || status;
+    return statusMap[status] || 'Не указано';
   }
 
   /**
-   * Format a company's price tier for display
+   * Форматирует ценовой уровень для отображения
    */
-  static formatPriceTier(tier: string): string {
-    const tierMap: Record<string, string> = {
+  static formatPriceTier(tier: PriceTier): string {
+    const tierMap: Record<PriceTier, string> = {
       premium: 'Премиум',
       'mid-range': 'Средний',
       budget: 'Бюджетный',
-      unknown: 'Не определен',
+      unknown: 'Не определен'
     };
-    return tierMap[tier] || tier;
+    return tierMap[tier] || 'Не определен';
   }
-  
+
   /**
-   * Format website URL for display and linking
+   * Форматирует URL сайта, добавляя протокол, если он отсутствует
    */
-  static formatWebsiteUrl(website: string | undefined): string {
-    if (!website) return '';
-    
+  static formatWebsiteUrl(website: string): string {
     return website.startsWith('http') ? website : `https://${website}`;
   }
-  
+
   /**
-   * Format date for display
+   * Форматирует номер телефона для отображения
    */
-  static formatDate(dateString: string | undefined): string {
-    if (!dateString) return '';
+  static formatPhoneNumber(phone: string): string {
+    // Очищаем номер от символов, кроме цифр
+    const digits = phone.replace(/\D/g, '');
     
-    try {
-      const date = new Date(dateString);
-      return date.toLocaleDateString('ru-RU', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-    } catch (e) {
-      return dateString;
+    // Если это российский номер (11 цифр, начинается с 7 или 8)
+    if (digits.length === 11 && (digits.startsWith('7') || digits.startsWith('8'))) {
+      const countryCode = '+7';
+      const areaCode = digits.substring(1, 4);
+      const firstPart = digits.substring(4, 7);
+      const secondPart = digits.substring(7, 9);
+      const thirdPart = digits.substring(9, 11);
+      
+      return `${countryCode} (${areaCode}) ${firstPart}-${secondPart}-${thirdPart}`;
+    }
+    
+    // Для других номеров возвращаем без изменений
+    return phone;
+  }
+
+  /**
+   * Создает ссылку для социальной сети на основе имени и значения
+   */
+  static formatSocialLink(network: string, value: string): string {
+    if (!value) return '';
+    
+    switch(network) {
+      case 'telegram':
+        return value.startsWith('https://t.me/') ? value : `https://t.me/${value.replace('@', '')}`;
+      case 'whatsapp':
+        return value.startsWith('https://wa.me/') ? value : `https://wa.me/${value.replace(/[^0-9]/g, '')}`;
+      case 'viber':
+        return value.startsWith('viber://') ? value : `viber://chat?number=${value.replace(/[^0-9]/g, '')}`;
+      case 'vkontakte':
+        return value.startsWith('https://vk.com/') ? value : `https://vk.com/${value}`;
+      case 'odnoklassniki':
+        return value.startsWith('https://ok.ru/') ? value : `https://ok.ru/${value}`;
+      case 'instagram':
+        return value.startsWith('https://instagram.com/') ? value : `https://instagram.com/${value.replace('@', '')}`;
+      case 'facebook':
+        return value.startsWith('https://facebook.com/') ? value : `https://facebook.com/${value}`;
+      case 'rutube':
+        return value.startsWith('https://rutube.ru/') ? value : `https://rutube.ru/channel/${value}`;
+      case 'yandexZen':
+        return value.startsWith('https://zen.yandex.ru/') ? value : `https://zen.yandex.ru/${value}`;
+      case 'youtube':
+        return value.startsWith('https://youtube.com/') ? value : `https://youtube.com/${value}`;
+      case 'twitter':
+        return value.startsWith('https://twitter.com/') ? value : `https://twitter.com/${value.replace('@', '')}`;
+      default:
+        return value;
     }
   }
 }

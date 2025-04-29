@@ -41,9 +41,9 @@ async function testAPI() {
       // Получение деталей первой компании
       const companyDetails = await companyProfileApi.findOne(companies[0].id);
       console.log('\n✓ Детали компании:');
-      console.log(`- Название: ${companyDetails.attributes.name}`);
-      console.log(`- ОПФ: ${companyDetails.attributes.legalStatus}`);
-      //console.log(`- Отрасль: ${companyDetails.attributes.industry?.displayName || 'не указана'}`);
+      console.log(`- Название: ${companyDetails.name}`);
+      console.log(`- ОПФ: ${companyDetails.legalStatus}`);
+      //console.log(`- Отрасль: ${companyDetails.industry?.displayName || 'не указана'}`);
     }
   } catch (error) {
     console.error('✗ CRUD Operations Failed:', error instanceof Error ? error.message : error);
@@ -57,13 +57,13 @@ async function testAPI() {
     const testSlug = 'test-company';
     const bySlug = await companyProfileApi.findBySlug(testSlug);
     console.log(`✓ Поиск по slug (${testSlug}):`);
-    console.log(`- Найдена компания: ${bySlug.attributes.name}`);
+    console.log(`- Найдена компания: ${bySlug.name}`);
 
     // Поиск по ИНН
     const testTaxId = '1234567890';
     const byTaxId = await companyProfileApi.findByTaxId(testTaxId);
     console.log(`\n✓ Поиск по ИНН (${testTaxId}):`);
-    console.log(`- Найдена компания: ${byTaxId.attributes.name}`);
+    console.log(`- Найдена компания: ${byTaxId.name}`);
   } catch (error) {
     console.error('✗ Custom Routes Failed:', error instanceof Error ? error.message : error);
     process.exit(1);
@@ -75,13 +75,13 @@ async function testAPI() {
     const testCompany = await companyProfileApi.findOne(1);
     
     console.log('✓ Контактная информация:');
-    console.log(`- Телефон: ${testCompany.attributes.phone}`);
-    console.log(`- Email: ${testCompany.attributes.email}`);
+    console.log(`- Телефон: ${testCompany.phone}`);
+    console.log(`- Email: ${testCompany.email}`);
     
-    if (testCompany.attributes.yandexDirectories) {
+    if (testCompany.yandexDirectories) {
       console.log('\n✓ Данные Яндекс.Справочника:');
-      console.log(`- Категории: ${testCompany.attributes.yandexDirectories.categories}`);
-      console.log(`- Филиалов: ${testCompany.attributes.yandexDirectories.branches}`);
+      console.log(`- Категории: ${testCompany.yandexDirectories.categories}`);
+      console.log(`- Филиалов: ${testCompany.yandexDirectories.branches}`);
     }
   } catch (error) {
     console.error('✗ Components Check Failed:', error instanceof Error ? error.message : error);
@@ -100,10 +100,10 @@ async function testAPI() {
       // Тест иерархии отраслей
       const industryResponse = await fetch(`${process.env.STRAPI_API_URL}/api/industries/1`);
       const industryData = await industryResponse.json();
-      console.log(`✓ Отрасль "${industryData.data.attributes.name}" (уровень ${industryData.data.attributes.level})`);
+      console.log(`✓ Отрасль "${industryData.data.name}" (уровень ${industryData.data.level})`);
       
-      if (industryData.data.attributes.children?.data?.length) {
-        console.log(`- Подкатегорий: ${industryData.data.attributes.children.data.length}`);
+      if (industryData.data.children?.data?.length) {
+        console.log(`- Подкатегорий: ${industryData.data.children.data.length}`);
       }
     } catch (error) {
       console.error('✗ Industry Relations Failed:', error instanceof Error ? error.message : error);

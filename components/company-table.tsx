@@ -349,7 +349,6 @@ export default function CompanyTable({
     <div className="overflow-x-auto max-w-full">
       <Table 
         aria-label="Таблица компаний"
-        sortDescriptor={sorting}
         onSortChange={handleSortChange}
         classNames={{
           th: "text-xs py-2",        // Уменьшенный шрифт для заголовков
