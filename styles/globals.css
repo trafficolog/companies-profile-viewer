@@ -1,3 +1,26 @@
+
+/* styles/globals.css */
+/* Import custom theme first - must come before Tailwind imports */
+@import './themes.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom component styling */
+@layer components {
+  /* Custom button styling with primary color */
+  .btn-primary-custom {
+    @apply bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-400;
+  }
+  
+  /* Custom chip styling */
+  .chip-primary-custom {
+    @apply bg-primary-100 text-primary-700 border-primary-200;
+  }
+  
+  /* Custom progress bar */
+  .progress-primary-custom {
+    @apply bg-primary-500;
+  }
+}

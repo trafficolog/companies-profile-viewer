@@ -1,0 +1,80 @@
+/* styles/themes.css */
+:root {
+  /* Base primary color: #ba0c2e */
+  --primary-50: #fbe9ec;
+  --primary-100: #f8d2d9;
+  --primary-200: #f0a5b3;
+  --primary-300: #e8798d;
+  --primary-400: #e04c67;
+  --primary-500: #ba0c2e; /* Main primary color */
+  --primary-600: #950a25;
+  --primary-700: #70071c;
+  --primary-800: #4c0512;
+  --primary-900: #270209;
+  
+  /* Update all component theme colors to use our primary color */
+  --heroui-primary: var(--primary-500);
+  --heroui-primary-50: var(--primary-50);
+  --heroui-primary-100: var(--primary-100);
+  --heroui-primary-200: var(--primary-200);
+  --heroui-primary-300: var(--primary-300);
+  --heroui-primary-400: var(--primary-400);
+  --heroui-primary-500: var(--primary-500);
+  --heroui-primary-600: var(--primary-600);
+  --heroui-primary-700: var(--primary-700);
+  --heroui-primary-800: var(--primary-800);
+  --heroui-primary-900: var(--primary-900);
+  
+  /* Primary text colors */
+  --heroui-primary-foreground: #ffffff;
+  --heroui-primary-50-foreground: #000000;
+  --heroui-primary-100-foreground: #000000;
+  --heroui-primary-200-foreground: #000000;
+  --heroui-primary-300-foreground: #000000;
+  --heroui-primary-400-foreground: #ffffff;
+  --heroui-primary-500-foreground: #ffffff;
+  --heroui-primary-600-foreground: #ffffff;
+  --heroui-primary-700-foreground: #ffffff;
+  --heroui-primary-800-foreground: #ffffff;
+  --heroui-primary-900-foreground: #ffffff;
+}
+
+/* Dark mode overrides */
+.dark {
+  --primary-50: #270209;
+  --primary-100: #4c0512;
+  --primary-200: #70071c;
+  --primary-300: #950a25;
+  --primary-400: #ba0c2e;
+  --primary-500: #e04c67; /* Main primary color in dark mode (brighter) */
+  --primary-600: #e8798d;
+  --primary-700: #f0a5b3;
+  --primary-800: #f8d2d9;
+  --primary-900: #fbe9ec;
+  
+  /* Update all component theme colors for dark mode */
+  --heroui-primary: var(--primary-500);
+  --heroui-primary-50: var(--primary-50);
+  --heroui-primary-100: var(--primary-100);
+  --heroui-primary-200: var(--primary-200);
+  --heroui-primary-300: var(--primary-300);
+  --heroui-primary-400: var(--primary-400);
+  --heroui-primary-500: var(--primary-500);
+  --heroui-primary-600: var(--primary-600);
+  --heroui-primary-700: var(--primary-700);
+  --heroui-primary-800: var(--primary-800);
+  --heroui-primary-900: var(--primary-900);
+  
+  /* Dark mode text colors */
+  --heroui-primary-foreground: #000000;
+  --heroui-primary-50-foreground: #ffffff;
+  --heroui-primary-100-foreground: #ffffff;
+  --heroui-primary-200-foreground: #ffffff;
+  --heroui-primary-300-foreground: #ffffff;
+  --heroui-primary-400-foreground: #ffffff;
+  --heroui-primary-500-foreground: #000000;
+  --heroui-primary-600-foreground: #000000;
+  --heroui-primary-700-foreground: #000000;
+  --heroui-primary-800-foreground: #000000;
+  --heroui-primary-900-foreground: #000000;
+}

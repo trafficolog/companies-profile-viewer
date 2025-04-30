@@ -2,7 +2,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "OVEN",
+  name: "Protiven",
   description: "Просмотр профилей компаний собранных с разных публичных источников",
   navItems: [
     {
@@ -14,7 +14,7 @@ export const siteConfig = {
       href: "/companies",
     },
     {
-      label: "Отрасли",
+      label: "Источники данных",
       href: "/industries",
     },
     {

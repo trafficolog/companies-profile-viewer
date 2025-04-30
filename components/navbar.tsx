@@ -17,18 +17,29 @@ import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { StrapiStatus } from "@/components/strapi-status";
 
+// Updated navigation items without Home
+const navItems = siteConfig.navItems.filter(item => item.label !== "Главная");
+
+// Add "Прогрев" item after "Компании"
+const updatedNavItems = [...navItems];
+const companiesIndex = updatedNavItems.findIndex(item => item.label === "Компании");
+if (companiesIndex !== -1) {
+  updatedNavItems.splice(companiesIndex + 1, 0, {
+    label: "Прогрев",
+    href: "/warming"
+  });
+}
+
 export const Navbar = () => {
   return (
     <HeroUINavbar className="container m-auto" maxWidth="full" position="sticky">
       {/* Логотип и пункты меню */}
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <NavbarBrand>
-          <NextLink href="/" className="flex items-center gap-2">
-            <span className="font-bold text-3xl">{siteConfig.name}</span>
-          </NextLink>
+        <NavbarBrand as={NextLink} href="/" className="cursor-pointer">
+          <span className="font-bold text-3xl">{siteConfig.name}</span>
         </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-6">
-          {siteConfig.navItems.map((item) => (
+          {updatedNavItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
                 className={clsx(
@@ -64,7 +75,7 @@ export const Navbar = () => {
       {/* Меню для мобильных устройств */}
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
-          {siteConfig.navItems.map((item, index) => (
+          {updatedNavItems.map((item, index) => (
             <NavbarMenuItem key={`${item.href}-${index}`}>
               <NextLink
                 href={item.href}

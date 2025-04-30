@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { title, subtitle } from "@/components/primitives";
-import LayoutWrapper from "../layout-wrapper";
 import { Card, CardBody, CardHeader, CardFooter } from "@heroui/card";
 import { Input } from "@heroui/input";
 import { Pagination } from "@heroui/pagination";
@@ -27,7 +26,7 @@ export default function CompaniesPage() {
   
   // Состояние для пагинации
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(10);
+  const [pageSize] = useState(25);
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   
@@ -210,7 +209,7 @@ export default function CompaniesPage() {
       // Запрос данных без пагинации (с большим лимитом)
       const result = await companyProfileApi.find({
         page: 1,
-        pageSize: 1000, // Большое значение для получения всех данных
+        pageSize: 25, // Большое значение для получения всех данных
         sort: sortBy,
         filters: apiFilters,
         populate: ['industry', 'location', 'social'],
@@ -278,8 +277,7 @@ export default function CompaniesPage() {
   };
 
   return (
-    <LayoutWrapper>
-      <div className="space-y-6">
+      <div className="space-y-6 w-full">
         <div className="flex justify-between items-center flex-wrap gap-2">
           <div>
             <h1 className={title({ size: "md" })}>Компании</h1>
@@ -381,18 +379,17 @@ export default function CompaniesPage() {
             <>
               <Divider />
               <CardFooter className="flex justify-center">
-                <Pagination
-                  total={totalPages}
-                  initialPage={page}
-                  page={page}
-                  onChange={(newPage) => setPage(newPage)}
-                  showControls
-                />
+              <Pagination
+                total={totalPages}
+                initialPage={page}
+                page={page}
+                onChange={(newPage) => setPage(newPage)}
+                showControls
+              />
               </CardFooter>
             </>
           )}
         </Card>
       </div>
-    </LayoutWrapper>
   );
 }

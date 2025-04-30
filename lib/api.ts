@@ -95,6 +95,23 @@ export const companyProfileApi = {
     };
   },
 
+  async findWithEmail(params?: {
+    page?: number;
+    pageSize?: number;
+    sort?: string;
+    filters?: Record<string, any>;
+    populate?: string | string[];
+  }) {
+    const filters = {
+      ...(params?.filters || {}),
+      email: { $notNull: true, $ne: "" }
+    };
+    return this.find({
+      ...params,
+      filters,
+    });
+  },
+
   async count(filters?: Record<string, any>) {
     let query = '';
     if (filters && Object.keys(filters).length > 0) {

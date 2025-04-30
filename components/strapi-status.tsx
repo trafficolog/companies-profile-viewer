@@ -61,7 +61,7 @@ export function StrapiStatus() {
         color={config.color as any}
         size="sm"
       >
-        b{config.label}
+        {config.label}
       </Chip>
     </Tooltip>
   );

@@ -272,7 +272,6 @@ export default function CompanyTable({
               href={href}
               showAnchorIcon={showIcon}
               color="primary"
-              className="text-xs"
             >
               {value}
             </Link>
@@ -310,7 +309,6 @@ export default function CompanyTable({
             href={CompanyService.formatWebsiteUrl(item.website)}
             showAnchorIcon
             color="primary"
-            className="text-xs"
           >
             {item.website}
           </Link>
@@ -318,7 +316,7 @@ export default function CompanyTable({
       
       case 'email':
         return item.email ? (
-          <Link href={`mailto:${item.email}`} color="primary" className="text-xs">
+          <Link href={`mailto:${item.email}`} color="primary">
             {item.email}
           </Link>
         ) : '—';
@@ -349,10 +347,9 @@ export default function CompanyTable({
     <div className="overflow-x-auto max-w-full">
       <Table 
         aria-label="Таблица компаний"
-        onSortChange={handleSortChange}
         classNames={{
-          th: "text-xs py-2",        // Уменьшенный шрифт для заголовков
-          td: "text-xs py-2",        // Уменьшенный шрифт для ячеек
+          th: "py-2",        // Уменьшенный шрифт для заголовков
+          td: "py-2",        // Уменьшенный шрифт для ячеек
           table: "min-w-full",       // Таблица занимает всю доступную ширину
           wrapper: "max-w-full",     // Обертка занимает всю доступную ширину
         }}
@@ -362,16 +359,9 @@ export default function CompanyTable({
             <TableColumn 
               key={column.uid} 
               allowsSorting={column.sortable}
-              className="px-2"  // Уменьшаем горизонтальные отступы
+              className="px-2"
             >
-              <div className="flex items-center gap-1 text-xs">
                 {column.name}
-                {column.uid === sorting.column && (
-                  sorting.direction === "ascending" ? 
-                  <SortAscIcon className="text-primary w-3 h-3" /> : 
-                  <SortDescIcon className="text-primary w-3 h-3" />
-                )}
-              </div>
             </TableColumn>
           )}
         </TableHeader>
@@ -383,9 +373,7 @@ export default function CompanyTable({
             <TableRow key={item.id} className="hover:bg-default-50">
               {(columnKey) => (
                 <TableCell className="px-2 whitespace-nowrap"> {/* Уменьшаем отступы и запрещаем перенос */}
-                  <div className="text-xs">
                     {renderCell(item, columnKey)}
-                  </div>
                 </TableCell>
               )}
             </TableRow>

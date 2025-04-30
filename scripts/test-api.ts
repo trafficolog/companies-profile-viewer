@@ -43,7 +43,7 @@ async function testAPI() {
       console.log('\n✓ Детали компании:');
       console.log(`- Название: ${companyDetails.name}`);
       console.log(`- ОПФ: ${companyDetails.legalStatus}`);
-      //console.log(`- Отрасль: ${companyDetails.industry?.displayName || 'не указана'}`);
+      //console.log(`- Отрасль: ${companyDetails.attributes.industry?.displayName || 'не указана'}`);
     }
   } catch (error) {
     console.error('✗ CRUD Operations Failed:', error instanceof Error ? error.message : error);
@@ -100,10 +100,10 @@ async function testAPI() {
       // Тест иерархии отраслей
       const industryResponse = await fetch(`${process.env.STRAPI_API_URL}/api/industries/1`);
       const industryData = await industryResponse.json();
-      console.log(`✓ Отрасль "${industryData.data.name}" (уровень ${industryData.data.level})`);
+      console.log(`✓ Отрасль "${industryData.data.attributes.name}" (уровень ${industryData.data.attributes.level})`);
       
-      if (industryData.data.children?.data?.length) {
-        console.log(`- Подкатегорий: ${industryData.data.children.data.length}`);
+      if (industryData.data.attributes.children?.data?.length) {
+        console.log(`- Подкатегорий: ${industryData.data.attributes.children.data.length}`);
       }
     } catch (error) {
       console.error('✗ Industry Relations Failed:', error instanceof Error ? error.message : error);

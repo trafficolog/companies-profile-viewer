@@ -1,82 +1,206 @@
 // app/page.tsx
-import { title, subtitle } from "@/components/primitives";
-import LayoutWrapper from "./layout-wrapper";
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
+import { title } from "@/components/primitives";
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
+import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
+import { Chip } from "@heroui/chip";
 import { Divider } from "@heroui/divider";
+import { 
+  CompaniesIcon, 
+  SourcesIcon, 
+  AnalyticsIcon, 
+  WarmingIcon 
+} from "@/components/icons";
 
 export default function Home() {
   return (
-    <LayoutWrapper>
-      <div className="space-y-10">
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className={title({ size: "lg" })}>Агрегатор профилей компаний</h1>
-          <p className={subtitle()}>
-            Просматривайте и анализируйте данные о компаниях, собранные из различных публичных источников
-          </p>
-          <div className="flex justify-center gap-4 mt-8">
-            <Button as={Link} href="/companies" color="primary" size="lg">
+    <div className="space-y-8">
+      {/* Верхний блок - обзор платформы */}
+      <Card className="border shadow-sm">
+        <CardBody className="p-6">
+          <div className="flex flex-col md:flex-row gap-6 items-center">
+            <div className="flex-1">
+              <h1 className={title({ size: "lg", className: "text-left" })}>
+                Агрегатор <span className="text-primary-500">профилей компаний</span>
+              </h1>
+              <p className="text-xl mt-2 mb-4 text-default-600">
+                Единая платформа для сбора, анализа и работы с данными о компаниях
+              </p>
+              <div className="flex gap-4 flex-wrap">
+                <Button as={Link} href="/companies" color="primary" size="lg">
+                  Начать работу
+                </Button>
+                <Button as={Link} href="/docs" variant="bordered" size="lg">
+                  Документация
+                </Button>
+              </div>
+            </div>
+            <div className="w-full md:w-1/3 bg-primary-50 p-6 rounded-xl">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col items-center">
+                  <p className="text-3xl font-bold text-primary-500">1,245</p>
+                  <p className="text-default-600">Компаний</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <p className="text-3xl font-bold text-primary-500">7</p>
+                  <p className="text-default-600">Источников</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <p className="text-3xl font-bold text-primary-500">843</p>
+                  <p className="text-default-600">Email</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  <p className="text-3xl font-bold text-primary-500">53</p>
+                  <p className="text-default-600">Регионов</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardBody>
+      </Card>
+
+      {/* Основные модули - сетка */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card className="border shadow-sm">
+          <CardHeader className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-primary-100 text-primary-500">
+              <CompaniesIcon size={24} />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold">Компании</h2>
+              <p className="text-small text-default-500">База данных организаций</p>
+            </div>
+          </CardHeader>
+          <Divider />
+          <CardBody>
+            <p className="text-default-600">
+              Полная информация о компаниях с возможностью фильтрации, сортировки и экспорта данных.
+              Персонализированные представления и настройки отображения.
+            </p>
+            <div className="flex gap-2 flex-wrap mt-4">
+              <Chip size="sm" color="primary" variant="flat">Поиск</Chip>
+              <Chip size="sm" color="primary" variant="flat">Фильтрация</Chip>
+              <Chip size="sm" color="primary" variant="flat">Экспорт CSV</Chip>
+            </div>
+          </CardBody>
+          <CardFooter>
+            <Button as={Link} href="/companies" color="primary" variant="flat">
               Перейти к компаниям
             </Button>
-          </div>
-        </div>
-        
-        <Divider className="my-8" />
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card shadow="sm" isHoverable className="border-none">
-            <CardHeader className="pb-0 pt-4 px-4 flex-col items-start">
-              <h2 className="font-bold text-2xl">Компании</h2>
-              <p className="text-default-500 text-sm">Информация о компаниях</p>
-            </CardHeader>
-            <CardBody className="overflow-visible py-4">
-              <p className="text-default-600">
-                Просмотр информации о компаниях из различных источников, включая контактные данные, отрасли и ценовые категории.
-              </p>
-            </CardBody>
-            <CardFooter>
-              <Button as={Link} color="primary" href="/companies" fullWidth>
-                Перейти
-              </Button>
-            </CardFooter>
-          </Card>
-          
-          <Card shadow="sm" isHoverable className="border-none">
-            <CardHeader className="pb-0 pt-4 px-4 flex-col items-start">
-              <h2 className="font-bold text-2xl">Отрасли</h2>
-              <p className="text-default-500 text-sm">Информация по отраслям</p>
-            </CardHeader>
-            <CardBody className="overflow-visible py-4">
-              <p className="text-default-600">
-                Классификация компаний по отраслям и специализациям для быстрого поиска и анализа данных.
-              </p>
-            </CardBody>
-            <CardFooter>
-              <Button as={Link} color="primary" href="/industries" fullWidth>
-                Перейти
-              </Button>
-            </CardFooter>
-          </Card>
-          
-          <Card shadow="sm" isHoverable className="border-none">
-            <CardHeader className="pb-0 pt-4 px-4 flex-col items-start">
-              <h2 className="font-bold text-2xl">Аналитика</h2>
-              <p className="text-default-500 text-sm">Статистика и инсайты</p>
-            </CardHeader>
-            <CardBody className="overflow-visible py-4">
-              <p className="text-default-600">
-                Визуальные отчеты и статистика по компаниям, с возможностью анализа по различным параметрам.
-              </p>
-            </CardBody>
-            <CardFooter>
-              <Button as={Link} color="primary" href="/analytics" fullWidth>
-                Перейти
-              </Button>
-            </CardFooter>
-          </Card>
-        </div>
+          </CardFooter>
+        </Card>
+
+        <Card className="border shadow-sm">
+          <CardHeader className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-primary-100 text-primary-500">
+              <SourcesIcon size={24} />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold">Источники данных</h2>
+              <p className="text-small text-default-500">Мультиплатформенный сбор</p>
+            </div>
+          </CardHeader>
+          <Divider />
+          <CardBody>
+            <p className="text-default-600">
+              Данные из различных источников: Яндекс.Справочник, Яндекс.Поиск, 2GIS, 
+              Яндекс.Карты и других сервисов в одном месте.
+            </p>
+            <div className="flex gap-2 flex-wrap mt-4">
+              <Chip size="sm" color="primary" variant="flat">Яндекс.Поиск</Chip>
+              <Chip size="sm" color="primary" variant="flat">Яндекс.Справочник</Chip>
+              <Chip size="sm" color="primary" variant="flat">2GIS</Chip>
+            </div>
+          </CardBody>
+          <CardFooter>
+            <Button as={Link} href="/industries" color="primary" variant="flat">
+              Источники данных
+            </Button>
+          </CardFooter>
+        </Card>
+
+        <Card className="border shadow-sm">
+          <CardHeader className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-primary-100 text-primary-500">
+              <AnalyticsIcon size={24} />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold">Аналитика</h2>
+              <p className="text-small text-default-500">Визуализация и отчеты</p>
+            </div>
+          </CardHeader>
+          <Divider />
+          <CardBody>
+            <p className="text-default-600">
+              Статистика и анализ данных по компаниям. Распределение по источникам,
+              наличию контактных данных, социальным сетям и мессенджерам.
+            </p>
+            <div className="flex gap-2 flex-wrap mt-4">
+              <Chip size="sm" color="primary" variant="flat">Статистика</Chip>
+              <Chip size="sm" color="primary" variant="flat">Графики</Chip>
+              <Chip size="sm" color="primary" variant="flat">Отчеты</Chip>
+            </div>
+          </CardBody>
+          <CardFooter>
+            <Button as={Link} href="/analytics" color="primary" variant="flat">
+              Перейти к аналитике
+            </Button>
+          </CardFooter>
+        </Card>
+
+        <Card className="border shadow-sm">
+          <CardHeader className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-primary-100 text-primary-500">
+              <WarmingIcon size={24} />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold">Email-прогрев</h2>
+              <p className="text-small text-default-500">Автоматизация рассылок</p>
+            </div>
+          </CardHeader>
+          <Divider />
+          <CardBody>
+            <p className="text-default-600">
+              Управление рассылками для компаний с email-адресами. Контроль статуса прогрева,
+              отправка писем и отслеживание статистики открытий.
+            </p>
+            <div className="flex gap-2 flex-wrap mt-4">
+              <Chip size="sm" color="primary" variant="flat">Рассылки</Chip>
+              <Chip size="sm" color="primary" variant="flat">Статусы</Chip>
+              <Chip size="sm" color="primary" variant="flat">Статистика</Chip>
+            </div>
+          </CardBody>
+          <CardFooter>
+            <Button as={Link} href="/warming" color="primary" variant="flat">
+              Перейти к прогреву
+            </Button>
+          </CardFooter>
+        </Card>
       </div>
-    </LayoutWrapper>
+
+      {/* Нижний блок CTA */}
+      <Card className="bg-primary-500 shadow-md border-none">
+        <CardBody className="p-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="text-white">
+              <h2 className="text-2xl font-bold">Начните работу прямо сейчас</h2>
+              <p className="text-white/80 mt-2">
+                Получите доступ к полной базе данных компаний из различных источников
+              </p>
+            </div>
+            <Button 
+              as={Link} 
+              href="/companies" 
+              size="lg" 
+              color="default" 
+              variant="solid"
+              className="bg-white text-primary-500 font-medium"
+            >
+              Перейти к данным
+            </Button>
+          </div>
+        </CardBody>
+      </Card>
+    </div>
   );
 }

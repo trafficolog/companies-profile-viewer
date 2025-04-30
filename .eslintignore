@@ -12,9 +12,11 @@ node_modules
 coverage
 .next
 build
+*.tsx
 !.commitlintrc.cjs
 !.lintstagedrc.cjs
 !jest.config.js
 !plopfile.js
 !react-shim.js
 !tsup.config.ts
+*.test.ts
