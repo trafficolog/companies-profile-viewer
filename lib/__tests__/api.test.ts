@@ -1,4 +1,4 @@
-import { companyProfileApi } from '@/lib/api';
+import { companyProfileApi } from '@/lib/api/companies';
 import { server } from '@/mocks/server';
 import { http, HttpResponse } from 'msw';
 import { mockCompany, mockIndustry } from '@/mocks/test-utils';

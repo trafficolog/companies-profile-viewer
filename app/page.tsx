@@ -27,7 +27,7 @@ export default function Home() {
                 Единая платформа для сбора, анализа и работы с данными о компаниях
               </p>
               <div className="flex gap-4 flex-wrap">
-                <Button as={Link} href="/companies" color="primary" size="lg">
+                <Button as={Link} href="/companies" color="primary" className="bg-primary-500" size="lg">
                   Начать работу
                 </Button>
                 <Button as={Link} href="/docs" variant="bordered" size="lg">
@@ -78,13 +78,13 @@ export default function Home() {
               Персонализированные представления и настройки отображения.
             </p>
             <div className="flex gap-2 flex-wrap mt-4">
-              <Chip size="sm" color="primary" variant="flat">Поиск</Chip>
-              <Chip size="sm" color="primary" variant="flat">Фильтрация</Chip>
-              <Chip size="sm" color="primary" variant="flat">Экспорт CSV</Chip>
+              <Chip size="sm" color="primary" className="bg-primary-50" variant="flat">Поиск</Chip>
+              <Chip size="sm" color="primary" className="bg-primary-50" variant="flat">Фильтрация</Chip>
+              <Chip size="sm" color="primary" className="bg-primary-50" variant="flat">Экспорт CSV</Chip>
             </div>
           </CardBody>
           <CardFooter>
-            <Button as={Link} href="/companies" color="primary" variant="flat">
+            <Button as={Link} href="/companies" variant="bordered">
               Перейти к компаниям
             </Button>
           </CardFooter>
@@ -107,13 +107,13 @@ export default function Home() {
               Яндекс.Карты и других сервисов в одном месте.
             </p>
             <div className="flex gap-2 flex-wrap mt-4">
-              <Chip size="sm" color="primary" variant="flat">Яндекс.Поиск</Chip>
-              <Chip size="sm" color="primary" variant="flat">Яндекс.Справочник</Chip>
-              <Chip size="sm" color="primary" variant="flat">2GIS</Chip>
+              <Chip size="sm" color="primary" className="bg-primary-50" variant="flat">Яндекс.Поиск</Chip>
+              <Chip size="sm" color="primary" className="bg-primary-50" variant="flat">Яндекс.Справочник</Chip>
+              <Chip size="sm" color="primary" className="bg-primary-50" variant="flat">2GIS</Chip>
             </div>
           </CardBody>
           <CardFooter>
-            <Button as={Link} href="/industries" color="primary" variant="flat">
+            <Button as={Link} href="/industries" variant="bordered">
               Источники данных
             </Button>
           </CardFooter>
@@ -136,13 +136,13 @@ export default function Home() {
               наличию контактных данных, социальным сетям и мессенджерам.
             </p>
             <div className="flex gap-2 flex-wrap mt-4">
-              <Chip size="sm" color="primary" variant="flat">Статистика</Chip>
-              <Chip size="sm" color="primary" variant="flat">Графики</Chip>
-              <Chip size="sm" color="primary" variant="flat">Отчеты</Chip>
+              <Chip size="sm" color="primary" className="bg-primary-50" variant="flat">Статистика</Chip>
+              <Chip size="sm" color="primary" className="bg-primary-50" variant="flat">Графики</Chip>
+              <Chip size="sm" color="primary" className="bg-primary-50" variant="flat">Отчеты</Chip>
             </div>
           </CardBody>
           <CardFooter>
-            <Button as={Link} href="/analytics" color="primary" variant="flat">
+            <Button as={Link} href="/analytics" variant="bordered">
               Перейти к аналитике
             </Button>
           </CardFooter>
@@ -165,13 +165,13 @@ export default function Home() {
               отправка писем и отслеживание статистики открытий.
             </p>
             <div className="flex gap-2 flex-wrap mt-4">
-              <Chip size="sm" color="primary" variant="flat">Рассылки</Chip>
-              <Chip size="sm" color="primary" variant="flat">Статусы</Chip>
-              <Chip size="sm" color="primary" variant="flat">Статистика</Chip>
+              <Chip size="sm" color="primary" className="bg-primary-50" variant="flat">Рассылки</Chip>
+              <Chip size="sm" color="primary" className="bg-primary-50" variant="flat">Статусы</Chip>
+              <Chip size="sm" color="primary" className="bg-primary-50" variant="flat">Статистика</Chip>
             </div>
           </CardBody>
           <CardFooter>
-            <Button as={Link} href="/warming" color="primary" variant="flat">
+            <Button as={Link} href="/warming" variant="bordered">
               Перейти к прогреву
             </Button>
           </CardFooter>

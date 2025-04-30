@@ -1,6 +1,6 @@
 // app/analytics/page.tsx
 import { title, subtitle } from "@/components/primitives";
-import { AnalyticsContent } from "@/components/analytics-content";
+import { AnalyticsContent } from "@/components/content/analytics-content";
 
 export default function AnalyticsPage() {
   return (

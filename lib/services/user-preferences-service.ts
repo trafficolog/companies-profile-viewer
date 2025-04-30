@@ -1,6 +1,6 @@
 // lib/services/user-preferences-service.ts
 import type { SortDescriptor } from "@heroui/react";
-import { CompanyFilters } from "@/components/company-filters";
+import { CompanyFilters } from "@/components/company/list/filters";
 
 const STORAGE_KEY = 'company_table_preferences';
 

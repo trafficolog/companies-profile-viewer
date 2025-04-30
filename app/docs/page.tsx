@@ -1,6 +1,6 @@
 // app/docs/page.tsx
 import { title, subtitle } from "@/components/primitives";
-import { DocsContent } from "@/components/docs-content";
+import { DocsContent } from "@/components/content/docs-content";
 
 export default function DocsPage() {
   return (

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import CompanyTable from '../company-table';
+import CompanyTable from '../company/list/table';
 import { server } from '@/mocks/server';
 import { HttpResponse, http } from 'msw';
 import { mockCompany } from '@/mocks/test-utils';

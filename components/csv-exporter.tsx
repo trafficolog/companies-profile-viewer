@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Button } from "@heroui/react";
 import { NormalizedCompany } from '@/types/company';
-import { COMPANY_COLUMNS } from '@/components/company-table';
+import { COMPANY_COLUMNS } from '@/components/company/list/table';
 import { CompanyService } from '@/lib/services/company-service';
 
 interface CSVExporterProps {

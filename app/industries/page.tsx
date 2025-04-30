@@ -1,6 +1,6 @@
 // app/industries/page.tsx
 import { title, subtitle } from "@/components/primitives";
-import { DataSourcesContent } from "@/components/data-sources-content";
+import { DataSourcesContent } from "@/components/content/data-sources-content";
 
 export default function IndustriesPage() {
   return (

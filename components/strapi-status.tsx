@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { checkStrapiStatus } from '@/lib/api';
+import { checkStrapiStatus } from '@/lib/api/companies';
 import { Chip } from "@heroui/chip";
 import { Tooltip } from "@heroui/tooltip";
 import { CheckCircleIcon, ExclamationCircleIcon, CubesLinearIcon } from "@/components/icons";

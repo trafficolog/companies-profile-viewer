@@ -1,5 +1,5 @@
 // lib/services/company-service.ts
-import { companyProfileApi } from '@/lib/api';
+import { companyProfileApi } from '@/lib/api/companies';
 import { normalizeCompanies, normalizeCompany } from '@/lib/normalizers';
 import { NormalizedCompany } from '@/types/company';
 
